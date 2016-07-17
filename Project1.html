@@ -139,6 +139,7 @@ plot(timeseries$interval,timeseries$avg.steps,type =&quot;l&quot;,main= &quot;Ti
 </div>
 <div id="histogram-of-the-total-number-of-steps-taken-each-day-after-missing-values-are-imputed" class="section level3">
 <h3>Histogram of the total number of steps taken each day after missing values are imputed</h3>
+<p>Missing values are imputed using the average steps taken in a identified 5 minutes. After imputing the missing data, the general distribution of the histogram seems unchanged but the distribution is smoother than non-imputed data.</p>
 <pre class="r"><code>library(dplyr)
 data.full&lt;- inner_join (dataset,timeseries,by=&quot;interval&quot;) %&gt;% 
             mutate(steps=ifelse(is.na(steps),avg.steps,steps))%&gt;%
@@ -158,6 +159,7 @@ abline(h=mean(sumdaily_full$steps,na.rm=TRUE),col=&quot;red&quot;,lwd=2)</code><
 </div>
 <div id="panel-plot-comparing-the-average-number-of-steps-taken-per-5-minute-interval-across-weekdays-and-weekends" class="section level3">
 <h3>Panel plot comparing the average number of steps taken per 5-minute interval across weekdays and weekends</h3>
+<p>On average, people tend to perform more activities through out the day compared to a weekday.</p>
 <pre class="r"><code>data.full$weekday &lt;-weekdays(data.full$date)
 data.full$is.weekend &lt;- as.factor(ifelse(data.full$weekday %in% c(&quot;Saturday&quot;,&quot;Sunday&quot;), &quot;weekend&quot;,&quot;weekday&quot;))
 

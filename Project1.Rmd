@@ -79,6 +79,9 @@ avgday<- ddply(narmdataset,.(interval,day),summarize, Avg = mean(steps))
 ```
 
 ###Histogram of the total number of steps taken each day after missing values are imputed
+Missing values are imputed using the average steps taken in a identified 5 minutes.
+After imputing the missing data, the general distribution of the histogram seems unchanged but the distribution is smoother than non-imputed data.
+
 ```{r Q7, warning=FALSE,message=FALSE}
 library(dplyr)
 data.full<- inner_join (dataset,timeseries,by="interval") %>% 
@@ -98,6 +101,8 @@ hist(sumdaily_full$steps,
 ```
 
 ###Panel plot comparing the average number of steps taken per 5-minute interval across weekdays and weekends
+On average, people tend to perform more activities through out the day compared to a weekday.
+
 ```{r Q8}
 data.full$weekday <-weekdays(data.full$date)
 data.full$is.weekend <- as.factor(ifelse(data.full$weekday %in% c("Saturday","Sunday"), "weekend","weekday"))
